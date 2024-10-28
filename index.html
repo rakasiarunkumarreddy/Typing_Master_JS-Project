@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash Type Speed</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Authentication Container -->
+    <div id="auth-container">
+        <div class="auth-form">
+            <h1 id="auth-title">Login</h1>
+            <input type="text" id="username" placeholder="Username" required />
+            <input type="password" id="password" placeholder="Password" required />
+            <button id="auth-action">Login</button>
+            <p id="toggle-auth">
+                Don't have an account? <span id="signup-link">Sign Up</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Typing Speed Test Application -->
+    <div class="app" id="typing-app" style="display:none;">
+        <header class="head">
+            <h1 class="heading">Increase Your Typing Speed</h1>
+        </header>
+        
+        <section class="value">
+            <div class="value-item">
+                <h2 class="label">Errors</h2>
+                <h3 id="error">0</h3>
+            </div>
+            <div class="value-item">
+                <h2 class="label">Timer</h2>
+                <h3 id="timer">00:00</h3>
+            </div>
+            <div class="value-item">
+                <h2 class="label">Accuracy</h2>
+                <h3 id="accu">100%</h3>
+            </div>
+            <div class="value-item">
+                <h2 class="label">WPM</h2>
+                <h3 id="wpm">0</h3>
+            </div>
+        </section>
+
+        <section class="array">
+            <h1 id="text">Sample text goes here...</h1>
+        </section>
+
+        <section class="type">
+            <input id="input" type="text" placeholder="Enter the given text" />
+        </section>
+
+        <!-- Difficulty Selection Buttons -->
+        <div class="difficulty-buttons">
+            <button class="btns" id="easy-btn">Easy</button>
+            <button class="btns" id="medium-btn">Medium</button>
+            <button class="btns" id="hard-btn">Hard</button>
+        </div>
+
+        <div id="difficulty-display"></div>
+
+        <div class="action-buttons">
+            <button id="start">START</button>
+            <button id="reset">RESET</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

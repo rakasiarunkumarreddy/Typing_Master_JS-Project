@@ -1,0 +1,261 @@
+/* General Styling */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: pink;
+    background-image: url("https://tinyurl.com/p3szu9he");
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Times New Roman', serif;
+    margin: 0;
+}
+
+.app {
+    background: rgba(255, 255, 255, 0.9); /*transparency */
+    padding: 20px;
+    border-radius: 40px;
+    box-shadow: 0 10px 50px pink;
+    text-align: center;
+}
+
+/* Login and Signup Styles */
+#auth-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.auth-form input {
+    margin: 10px;
+    padding: 10px;
+    width: 80%;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.auth-form button {
+    padding: 10px;
+    background-color: black; 
+    color: white;
+    border-radius: 10px;
+    border: none;
+    width: 100px;
+    margin-left:12px;
+    cursor: pointer
+
+}
+
+.auth-form button:hover {
+    background-color: maroon; 
+}
+
+#toggle-auth {
+    color: black;
+    font-size: 14px;
+}
+
+#signup-link {
+    color: blue;
+    cursor: pointer;
+}
+
+/* App Styles */
+.heading {
+    color: black;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.value {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.value-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.label {
+    font-size: 20px;
+    color: orange;
+}
+
+#error, #timer, #accu, #wpm {
+    padding: 15px;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 80px;
+    font-size: 24px;
+    color: white;
+    background-color: black;
+}
+
+.array {
+    margin: 20px 0;
+}
+
+#text {
+    border: 1px dashed black;
+    padding: 20px;
+    border-radius: 20px;
+    font-size: 20px;
+    color: maroon;
+}
+
+.type {
+    margin: 20px 0;
+}
+
+#input {
+    padding: 15px;
+    width: 600px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+#reset, #start {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: black; 
+    color: white;
+    border: none;
+    width: 100px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#start:hover, #reset:hover {
+    background-color: pink; 
+    color:black
+}
+
+/* Error Highlighting */
+.correct {
+    color: green;
+}
+
+.incorrect {
+    color: red;
+}
+
+/* Button Styles */
+.newbtn {
+    text-align: center;
+    margin: 10px 0;
+    display: flex;  
+    justify-content: center; 
+}
+
+.btns {
+    display: inline-block;
+    background-color: #f0f0f0; 
+    color: white; 
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 150px;
+}
+
+/* Easy button */
+.btns:nth-child(1) {
+    background-color: lightGreen; 
+}
+
+.btns:nth-child(1):hover {
+    background-color: green; 
+    transform: scale(1.05);
+}
+
+/* Medium button */
+.btns:nth-child(2) {
+    background-color: #ffc107; 
+}
+
+.btns:nth-child(2):hover {
+    background-color: #e0a800; 
+    transform: scale(1.05);
+}
+
+/* Hard button*/
+.btns:nth-child(3) {
+    background-color: #dc3545; 
+}
+
+.btns:nth-child(3):hover {
+    background-color: #c82333; 
+    transform: scale(1.05);
+}
+
+/* Media Queries */
+@media only screen and (min-width: 1025px) {
+    .app {
+        width: 60%;
+    }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    #input {
+        width: 70%;
+        font-size: 18px;
+    }
+
+    .heading {
+        font-size: 32px;
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+    .app {
+        width: 80%;
+        padding: 20px;
+    }
+
+    #input {
+        width: 90%;
+        font-size: 16px;
+    }
+
+    .heading {
+        font-size: 28px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .app {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .auth-form input, 
+    #input {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .heading {
+        font-size: 24px;
+    }
+
+    #error, #timer, #accu, #wpm {
+        width: 60px;
+        font-size: 20px;
+    }
+}
