@@ -86,6 +86,7 @@ let hardArr = [
 
 // Default text array
 let arr = easyArr; // Start with easy level
+let isModeSelected = false; // Track if a mode has been selected
 
 // Timer functionality
 let timeElapsed = 0;
@@ -118,8 +119,32 @@ const highlightText = (inputText) => {
     textElement.innerHTML = highlightedText;
 };
 
+// Difficulty buttons functionality
+easyButton.addEventListener("click", () => {
+    arr = easyArr;
+    isModeSelected = true;
+    alert("Easy mode selected");
+});
+
+mediumButton.addEventListener("click", () => {
+    arr = mediumArr;
+    isModeSelected = true;
+    alert("Medium mode selected");
+});
+
+hardButton.addEventListener("click", () => {
+    arr = hardArr;
+    isModeSelected = true;
+    alert("Hard mode selected");
+});
+
 // Start typing functionality
 startButton.addEventListener("click", () => {
+    if (!isModeSelected) {
+        alert("Please select a difficulty mode (Easy, Medium, or Hard) before starting.");
+        return;
+    }
+
     inputElement.value = "";
     inputElement.disabled = false;
     inputElement.focus();
@@ -163,7 +188,6 @@ inputElement.addEventListener("input", (e) => {
     // Check if the typed text exceeds the original text
     if (typedText.length > text.length) {
         alert("You have typed more than the given text");
-        // Optionally, you can truncate the input to the correct length
         inputElement.value = typedText.substring(0, text.length);
         return; // Prevent further processing
     }
@@ -176,13 +200,12 @@ inputElement.addEventListener("input", (e) => {
 
     if (typedText.length >= text.length) {
         if (typedText.trim() === text.trim()) {
-            // Format the alert message to include accuracy, WPM, and timer
             const formattedAlert = `You have entered the correct text! Moving to the next text..\n` +
                 `Accuracy: ${accuracy}%\n` +
                 `WPM: ${wpm}\n` +
                 `Time Elapsed: ${timerElement.innerText}`;
             alert(formattedAlert);
-            
+
             resetApp();
             startButton.click();
             return;
@@ -211,7 +234,7 @@ function startTimer(duration) {
         // Stop the timer after the specified duration and alert the user
         if (timeElapsed >= duration) {
             clearInterval(interval);
-            alert(`Time is up! Your typing session has ended.Retry once again \nAccuracy: ${accuracy}%\nWPM: ${wpm}`);
+            alert(`Time is up! Your typing session has ended. Retry once again \nAccuracy: ${accuracy}%\nWPM: ${wpm}`);
             resetApp();
         }
     }, 1000);
@@ -228,19 +251,3 @@ function resetApp() {
     wpmElement.innerText = "0";
     typingStarted = false;
 }
-
-// Difficulty buttons functionality
-easyButton.addEventListener("click", () => {
-    arr = easyArr;
-    alert("Easy mode selected");
-});
-
-mediumButton.addEventListener("click", () => {
-    arr = mediumArr;
-    alert("Medium mode selected");
-});
-
-hardButton.addEventListener("click", () => {
-    arr = hardArr;
-    alert("Hard mode selected");
-});
