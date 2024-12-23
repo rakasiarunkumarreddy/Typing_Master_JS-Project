@@ -286,4 +286,8 @@ body {
     .type{
         width:90%
     }
+    .auth-form{
+        width:80%;
+    }
+
 }
