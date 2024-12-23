@@ -264,3 +264,26 @@ body {
         font-size: 20px;
     }
 }
+
+@media only screen and (min-width: 375px) and (max-width: 475px){
+    #error, #timer, #accu, #wpm {
+        width: 40px;
+        font-size: 20px;
+    }
+    .type{
+        width:90%
+    }
+
+}
+
+
+
+@media only screen and (min-width: 320px) {
+    #error, #timer, #accu, #wpm {
+        width: 28px;
+        font-size: 15px;
+    }
+    .type{
+        width:90%
+    }
+}
