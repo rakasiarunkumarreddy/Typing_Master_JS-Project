@@ -123,19 +123,19 @@ const highlightText = (inputText) => {
 easyButton.addEventListener("click", () => {
     arr = easyArr;
     isModeSelected = true;
-    alert("Easy mode selected");
+    alert("Easy mode selected,click on start button to display easy text");
 });
 
 mediumButton.addEventListener("click", () => {
     arr = mediumArr;
     isModeSelected = true;
-    alert("Medium mode selected");
+    alert("Medium mode selected,click on start button to display medium text");
 });
 
 hardButton.addEventListener("click", () => {
     arr = hardArr;
     isModeSelected = true;
-    alert("Hard mode selected");
+    alert("Hard mode selected,click on start button to display hard text");
 });
 
 // Start typing functionality
