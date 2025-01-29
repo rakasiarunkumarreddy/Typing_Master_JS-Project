@@ -10,42 +10,42 @@ const passwordInput = document.getElementById("password");
 let isLogin = true;
 
 signupLink.addEventListener("click", () => {
-    isLogin = !isLogin;
-    if (isLogin) {
-        authTitle.innerText = "Login";
-        authAction.innerText = "Login";
-        toggleAuth.innerHTML = `Don't have an account? <span id="signup-link">Sign Up</span>`;
-    } else {
-        authTitle.innerText = "Sign Up";
-        authAction.innerText = "Sign Up";
-        toggleAuth.innerHTML = `Already have an account? <span id="signup-link">Login</span>`;
-    }
+  isLogin = !isLogin;
+  if (isLogin) {
+    authTitle.innerText = "Login";
+    authAction.innerText = "Login";
+    toggleAuth.innerHTML = `Don't have an account? <span id="signup-link">Sign Up</span>`;
+  } else {
+    authTitle.innerText = "Sign Up";
+    authAction.innerText = "Sign Up";
+    toggleAuth.innerHTML = `Already have an account? <span id="signup-link">Login</span>`;
+  }
 });
 
 authAction.addEventListener("click", () => {
-    const username = usernameInput.value;
-    const password = passwordInput.value;
+  const username = usernameInput.value;
+  const password = passwordInput.value;
 
-    if (isLogin) {
-        const storedUser = localStorage.getItem(username);
-        if (storedUser && storedUser === password) {
-            alert("Login successful!");
-            authContainer.style.display = "none";
-            typingApp.style.display = "block";
-        } else {
-            alert("Invalid credentials.");
-        }
+  if (isLogin) {
+    const storedUser = localStorage.getItem(username);
+    if (storedUser && storedUser === password) {
+      alert("Login successful!");
+      authContainer.style.display = "none";
+      typingApp.style.display = "block";
     } else {
-        if (username && password) {
-            localStorage.setItem(username, password);
-            alert("Signup successful! Please log in.");
-            isLogin = true;
-            authTitle.innerText = "Login";
-            authAction.innerText = "Login";
-        } else {
-            alert("Please fill in both fields.");
-        }
+      alert("Invalid credentials.");
     }
+  } else {
+    if (username && password) {
+      localStorage.setItem(username, password);
+      alert("Signup successful! Please log in.");
+      isLogin = true;
+      authTitle.innerText = "Login";
+      authAction.innerText = "Login";
+    } else {
+      alert("Please fill in both fields.");
+    }
+  }
 });
 
 // Typing App Code
@@ -68,25 +68,25 @@ let okButton = document.getElementById("ok-button");
 
 // Difficulty levels with different sentence arrays
 let easyArr = [
-    "The sun sets in the west.",
-    "I love ice cream.",
-    "She is reading a book.",
-    "He runs fast.",
-    "The cat is cute."
+  "The sun sets in the west.",
+  "I love ice cream.",
+  "She is reading a book.",
+  "He runs fast.",
+  "The cat is cute.",
 ];
 let mediumArr = [
-    "Learning to code is both fun and challenging.",
-    "The quick brown fox jumps over the lazy dog.",
-    "It is important to stay hydrated during the summer.",
-    "She enjoys painting in her free time.",
-    "They traveled to the mountains last weekend."
+  "Learning to code is both fun and challenging.",
+  "The quick brown fox jumps over the lazy dog.",
+  "It is important to stay hydrated during the summer.",
+  "She enjoys painting in her free time.",
+  "They traveled to the mountains last weekend.",
 ];
 let hardArr = [
-    "Artificial intelligence is revolutionizing various industries globally.",
-    "There are two types of clauses: independent and non-independent/interdependent. An independent clause realises a speech act such as a statement, a question, a command or an offer.",
-    "A non-independent clause does not realise any act. A non-independent clause (simplex or complex) is usually logically related to other non-independent clauses.",
-    "Together, they usually constitute a single independent clause (complex). For that reason, non-independent clauses are also called interdependent.",
-    "Understanding machine learning involves mastering both theory and practical implementation."
+  "Artificial intelligence is revolutionizing various industries globally.",
+  "There are two types of clauses: independent and non-independent/interdependent. An independent clause realises a speech act such as a statement, a question, a command or an offer.",
+  "A non-independent clause does not realise any act. A non-independent clause (simplex or complex) is usually logically related to other non-independent clauses.",
+  "Together, they usually constitute a single independent clause (complex). For that reason, non-independent clauses are also called interdependent.",
+  "Understanding machine learning involves mastering both theory and practical implementation.",
 ];
 
 // Default text array
@@ -105,168 +105,173 @@ let wpm = 0;
 let typingStarted = false;
 
 const updateUI = () => {
-    errorElement.innerText = errors;
-    accuElement.innerText = accuracy + "%";
-    wpmElement.innerText = wpm;
+  errorElement.innerText = errors;
+  accuElement.innerText = accuracy + "%";
+  wpmElement.innerText = wpm;
 };
 
 const highlightText = (inputText) => {
-    let highlightedText = "";
-    for (let i = 0; i < text.length; i++) {
-        if (inputText[i] === text[i]) {
-            highlightedText += `<span class="correct">${inputText[i]}</span>`;
-        } else if (i < inputText.length) {
-            highlightedText += `<span class="incorrect">${inputText[i]}</span>`;
-        } else {
-            highlightedText += text[i]; // Append remaining correct text without highlighting
-        }
+  let highlightedText = "";
+  for (let i = 0; i < text.length; i++) {
+    if (inputText[i] === text[i]) {
+      highlightedText += `<span class="correct">${inputText[i]}</span>`;
+    } else if (i < inputText.length) {
+      highlightedText += `<span class="incorrect">${inputText[i]}</span>`;
+    } else {
+      highlightedText += text[i]; // Append remaining correct text without highlighting
     }
-    textElement.innerHTML = highlightedText;
+  }
+  textElement.innerHTML = highlightedText;
 };
 
 // Difficulty buttons functionality
 easyButton.addEventListener("click", () => {
-    arr = easyArr;
-    isModeSelected = true;
-    alert("Easy mode selected, click on start button to display easy text.");
+  arr = easyArr;
+  isModeSelected = true;
+  alert("Easy mode selected, click on start button to display easy text.");
 });
 
 mediumButton.addEventListener("click", () => {
-    arr = mediumArr;
-    isModeSelected = true;
-    alert("Medium mode selected, click on start button to display medium text.");
+  arr = mediumArr;
+  isModeSelected = true;
+  alert("Medium mode selected, click on start button to display medium text.");
 });
 
 hardButton.addEventListener("click", () => {
-    arr = hardArr;
-    isModeSelected = true;
-    alert("Hard mode selected, click on start button to display hard text.");
+  arr = hardArr;
+  isModeSelected = true;
+  alert("Hard mode selected, click on start button to display hard text.");
 });
 
 // Start typing functionality
 startButton.addEventListener("click", () => {
-    if (!isModeSelected) {
-        alert("Please select a difficulty mode (Easy, Medium, or Hard) before starting.");
-        return;
-    }
+  if (!isModeSelected) {
+    alert(
+      "Please select a difficulty mode (Easy, Medium, or Hard) before starting."
+    );
+    return;
+  }
 
-    inputElement.value = "";
-    inputElement.disabled = false;
-    inputElement.focus();
-    text = arr[Math.floor(Math.random() * arr.length)];
-    textElement.innerText = text;
-    errors = 0;
-    typedChars = 0;
-    correctWords = 0;
-    accuracy = 0;
-    wpm = 0;
-    typingStarted = false;
-    updateUI();
+  inputElement.value = "";
+  inputElement.disabled = false;
+  inputElement.focus();
+  text = arr[Math.floor(Math.random() * arr.length)];
+  textElement.innerText = text;
+  errors = 0;
+  typedChars = 0;
+  correctWords = 0;
+  accuracy = 0;
+  wpm = 0;
+  typingStarted = false;
+  updateUI();
 });
 
 resetButton.addEventListener("click", resetApp);
 
 const showResults = () => {
-    clearInterval(interval); // Stop the timer when showing results
-    results.style.display = "block";
-    accuracyResult.innerHTML = `Accuracy: <span class="result-value">${accuracy}%</span>`;
-    wpmResult.innerHTML = `WPM: <span class="result-value">${wpm}</span>`;
-    timeElapsedResult.innerHTML = `Time Elapsed: <span class="result-value">${timerElement.innerText}</span>`;
+  clearInterval(interval); // Stop the timer when showing results
+  results.style.display = "block";
+  accuracyResult.innerHTML = `Accuracy: <span class="result-value">${accuracy}%</span>`;
+  wpmResult.innerHTML = `WPM: <span class="result-value">${wpm}</span>`;
+  timeElapsedResult.innerHTML = `Time Elapsed: <span class="result-value">${timerElement.innerText}</span>`;
 };
 
 okButton.addEventListener("click", () => {
-    results.style.display = "none";
-    startButton.click();
-    timeElapsed = 0; // Reset the timer to zero
-    timerElement.innerText = "00:00";
+  results.style.display = "none";
+  startButton.click();
+  timeElapsed = 0; // Reset the timer to zero
+  timerElement.innerText = "00:00";
 });
 
 inputElement.addEventListener("input", (e) => {
-    const typedText = e.target.value;
+  const typedText = e.target.value;
 
-    if (!typingStarted) {
-        typingStarted = true;
-        // Start timer based on difficulty
-        switch (arr) {
-            case easyArr:
-                startTimer(60); // 60 seconds for easy
-                break;
-            case mediumArr:
-                startTimer(45); // 45 seconds for medium
-                break;
-            case hardArr:
-                startTimer(30); // 30 seconds for hard
-                break;
-        }
+  if (!typingStarted) {
+    typingStarted = true;
+    // Start timer based on difficulty
+    switch (arr) {
+      case easyArr:
+        startTimer(60); // 60 seconds for easy
+        break;
+      case mediumArr:
+        startTimer(45); // 45 seconds for medium
+        break;
+      case hardArr:
+        startTimer(30); // 30 seconds for hard
+        break;
     }
+  }
 
-    typedChars++;
-    errors = 0;
+  typedChars++;
+  errors = 0;
 
-    highlightText(typedText);
+  highlightText(typedText);
 
-    // Check if the typed text exceeds the original text
-    if (typedText.length > text.length) {
-        alert("You have typed more than the given text.");
-        inputElement.value = typedText.substring(0, text.length);
-        return; // Prevent further processing
+  // Check if the typed text exceeds the original text
+  if (typedText.length > text.length) {
+    alert("You have typed more than the given text.");
+    inputElement.value = typedText.substring(0, text.length);
+    return; // Prevent further processing
+  }
+
+  for (let i = 0; i < typedText.length; i++) {
+    if (typedText[i] !== text[i]) {
+      errors++;
     }
+  }
 
-    for (let i = 0; i < typedText.length; i++) {
-        if (typedText[i] !== text[i]) {
-            errors++;
-        }
+  if (typedText.length >= text.length) {
+    if (typedText.trim() === text.trim()) {
+      showResults();
+      inputElement.disabled = true; // Disable input until the user clicks OK
+      return;
     }
+  }
 
-    if (typedText.length >= text.length) {
-        if (typedText.trim() === text.trim()) {
-            showResults();
-            inputElement.disabled = true; // Disable input until the user clicks OK
-            return;
-        }
-    }
+  if (typedText.endsWith(" ") || typedText.length >= text.length) {
+    const wordsTyped = typedText.trim().split(" ").length;
+    correctWords = Math.min(wordsTyped, text.trim().split(" ").length);
+    wpm = Math.round(correctWords / (timeElapsed / 60) || 0);
+  }
 
-    if (typedText.endsWith(' ') || typedText.length >= text.length) {
-        const wordsTyped = typedText.trim().split(' ').length;
-        correctWords = Math.min(wordsTyped, text.trim().split(' ').length);
-        wpm = Math.round((correctWords / (timeElapsed / 60)) || 0);
-    }
-
-    accuracy = Math.round(((typedChars - errors) / typedChars) * 100) || 0;
-    updateUI();
+  accuracy = Math.round(((typedChars - errors) / typedChars) * 100) || 0;
+  updateUI();
 });
 
 function startTimer(duration) {
-    timeElapsed = 0;
-    timerElement.innerText = "00:00";
-    interval = setInterval(() => {
-        timeElapsed++;
-        const minutes = Math.floor(timeElapsed / 60);
-        const seconds = timeElapsed % 60;
-        timerElement.innerText = `${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+  timeElapsed = 0;
+  timerElement.innerText = "00:00";
+  interval = setInterval(() => {
+    timeElapsed++;
+    const minutes = Math.floor(timeElapsed / 60);
+    const seconds = timeElapsed % 60;
+    timerElement.innerText = `${minutes < 10 ? "0" + minutes : minutes}:${
+      seconds < 10 ? "0" + seconds : seconds
+    }`;
 
-                // Stop the timer after the specified duration and alert the user
-                if (timeElapsed >= duration) {
-                    clearInterval(interval);
-                    showResults();
-                    alert(`Time is up! Your typing session has ended. Retry once again \nAccuracy: ${accuracy}%\nWPM: ${wpm}`);
-                    inputElement.disabled = true; // Disable input until the user clicks OK
-                }
-            }, 1000);
-        }
-        
-        function resetApp() {
-            clearInterval(interval);
-            inputElement.value = "";
-            inputElement.disabled = true;
-            textElement.innerText = "Sample text goes here...";
-            errorElement.innerText = "0";
-            timerElement.innerText = "00:00";
-            accuElement.innerText = "100%";
-            wpmElement.innerText = "0";
-            typingStarted = false;
-            results.style.display = "none";
-        }
-        
-        resetButton.addEventListener("click", resetApp);
-        
+    // Stop the timer after the specified duration and alert the user
+    if (timeElapsed >= duration) {
+      clearInterval(interval);
+      showResults();
+      alert(
+        `Time is up! Your typing session has ended. Retry once again \nAccuracy: ${accuracy}%\nWPM: ${wpm}`
+      );
+      inputElement.disabled = true; // Disable input until the user clicks OK
+    }
+  }, 1000);
+}
+
+function resetApp() {
+  clearInterval(interval);
+  inputElement.value = "";
+  inputElement.disabled = true;
+  textElement.innerText = "Sample text goes here...";
+  errorElement.innerText = "0";
+  timerElement.innerText = "00:00";
+  accuElement.innerText = "100%";
+  wpmElement.innerText = "0";
+  typingStarted = false;
+  results.style.display = "none";
+}
+
+resetButton.addEventListener("click", resetApp);
