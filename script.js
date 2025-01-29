@@ -60,6 +60,11 @@ let resetButton = document.getElementById("reset");
 let easyButton = document.getElementById("easy-btn");
 let mediumButton = document.getElementById("medium-btn");
 let hardButton = document.getElementById("hard-btn");
+let results = document.getElementById("results");
+let accuracyResult = document.getElementById("accuracy-result");
+let wpmResult = document.getElementById("wpm-result");
+let timeElapsedResult = document.getElementById("time-elapsed-result");
+let okButton = document.getElementById("ok-button");
 
 // Difficulty levels with different sentence arrays
 let easyArr = [
@@ -123,19 +128,19 @@ const highlightText = (inputText) => {
 easyButton.addEventListener("click", () => {
     arr = easyArr;
     isModeSelected = true;
-    alert("Easy mode selected,click on start button to display easy text");
+    alert("Easy mode selected, click on start button to display easy text.");
 });
 
 mediumButton.addEventListener("click", () => {
     arr = mediumArr;
     isModeSelected = true;
-    alert("Medium mode selected,click on start button to display medium text");
+    alert("Medium mode selected, click on start button to display medium text.");
 });
 
 hardButton.addEventListener("click", () => {
     arr = hardArr;
     isModeSelected = true;
-    alert("Hard mode selected,click on start button to display hard text");
+    alert("Hard mode selected, click on start button to display hard text.");
 });
 
 // Start typing functionality
@@ -160,6 +165,21 @@ startButton.addEventListener("click", () => {
 });
 
 resetButton.addEventListener("click", resetApp);
+
+const showResults = () => {
+    clearInterval(interval); // Stop the timer when showing results
+    results.style.display = "block";
+    accuracyResult.innerHTML = `Accuracy: <span class="result-value">${accuracy}%</span>`;
+    wpmResult.innerHTML = `WPM: <span class="result-value">${wpm}</span>`;
+    timeElapsedResult.innerHTML = `Time Elapsed: <span class="result-value">${timerElement.innerText}</span>`;
+};
+
+okButton.addEventListener("click", () => {
+    results.style.display = "none";
+    startButton.click();
+    timeElapsed = 0; // Reset the timer to zero
+    timerElement.innerText = "00:00";
+});
 
 inputElement.addEventListener("input", (e) => {
     const typedText = e.target.value;
@@ -187,7 +207,7 @@ inputElement.addEventListener("input", (e) => {
 
     // Check if the typed text exceeds the original text
     if (typedText.length > text.length) {
-        alert("You have typed more than the given text");
+        alert("You have typed more than the given text.");
         inputElement.value = typedText.substring(0, text.length);
         return; // Prevent further processing
     }
@@ -200,14 +220,8 @@ inputElement.addEventListener("input", (e) => {
 
     if (typedText.length >= text.length) {
         if (typedText.trim() === text.trim()) {
-            const formattedAlert = `You have entered the correct text! Moving to the next text..\n` +
-                `Accuracy: ${accuracy}%\n` +
-                `WPM: ${wpm}\n` +
-                `Time Elapsed: ${timerElement.innerText}`;
-            alert(formattedAlert);
-
-            resetApp();
-            startButton.click();
+            showResults();
+            inputElement.disabled = true; // Disable input until the user clicks OK
             return;
         }
     }
@@ -231,23 +245,28 @@ function startTimer(duration) {
         const seconds = timeElapsed % 60;
         timerElement.innerText = `${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
 
-        // Stop the timer after the specified duration and alert the user
-        if (timeElapsed >= duration) {
-            clearInterval(interval);
-            alert(`Time is up! Your typing session has ended. Retry once again \nAccuracy: ${accuracy}%\nWPM: ${wpm}`);
-            resetApp();
+                // Stop the timer after the specified duration and alert the user
+                if (timeElapsed >= duration) {
+                    clearInterval(interval);
+                    showResults();
+                    alert(`Time is up! Your typing session has ended. Retry once again \nAccuracy: ${accuracy}%\nWPM: ${wpm}`);
+                    inputElement.disabled = true; // Disable input until the user clicks OK
+                }
+            }, 1000);
         }
-    }, 1000);
-}
-
-function resetApp() {
-    clearInterval(interval);
-    inputElement.value = "";
-    inputElement.disabled = true;
-    textElement.innerText = "Sample text goes here....";
-    errorElement.innerText = "0";
-    timerElement.innerText = "00:00";
-    accuElement.innerText = "0%";
-    wpmElement.innerText = "0";
-    typingStarted = false;
-}
+        
+        function resetApp() {
+            clearInterval(interval);
+            inputElement.value = "";
+            inputElement.disabled = true;
+            textElement.innerText = "Sample text goes here...";
+            errorElement.innerText = "0";
+            timerElement.innerText = "00:00";
+            accuElement.innerText = "100%";
+            wpmElement.innerText = "0";
+            typingStarted = false;
+            results.style.display = "none";
+        }
+        
+        resetButton.addEventListener("click", resetApp);
+        
